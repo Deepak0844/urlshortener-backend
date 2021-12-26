@@ -151,7 +151,7 @@ router.route("/forgot-password").post(async (request, response) => {
     //if user does not exist
     response
       .status(401)
-      .send({ message: "Pending Account. Please Verify Your Email!" });
+      .send({ message: "Your account is not activated yet.Activation link has been send to your email already. kindly check it " });
     return;
   }
 
