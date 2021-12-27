@@ -41,7 +41,7 @@ router
     console.log(shortUrl);
 
     response.send({
-      shortUrl: `${request.headers.host}/url/${shortUrl.shortId}`,
+      shortUrl: `https://backendurlshortener.herokuapp.com/url/${shortUrl.shortId}`,
     });
   })
   //display all url
