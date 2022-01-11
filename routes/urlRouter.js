@@ -9,13 +9,14 @@ import {
   getChart,
 } from "../helper.js";
 import shortId from "shortid";
+import { auth } from "../middleware/auth.js";
 const router = express.Router();
 
 //url shortner
 //get the long url from request body
 router
   .route("/")
-  .post(async (request, response) => {
+  .post(auth, async (request, response) => {
     const { url } = request.body;
     const date = new Date();
     if (!url) {
@@ -45,14 +46,14 @@ router
     });
   })
   //display all url
-  .get(async (request, response) => {
+  .get(auth, async (request, response) => {
     const result = await allUrl();
     console.log(result.length);
     response.send(result);
   });
 
 // search for shortid available in database if available orginal url is rendered
-router.route("/:shortId").get(async (request, response) => {
+router.route("/:shortId").get(auth, async (request, response) => {
   const { shortId } = request.params;
   let counter = 0;
   const result = await ShortUrl({ shortId: shortId });
@@ -71,20 +72,20 @@ router.route("/:shortId").get(async (request, response) => {
 });
 
 //show url created per day
-router.route("/created/perday").get(async (request, response) => {
+router.route("/created/perday").get(auth, async (request, response) => {
   const result = await clickPerDay();
   console.log(result);
   response.send(result);
 });
 
 //created per month
-router.route("/created/permonth").get(async (request, response) => {
+router.route("/created/permonth").get(auth, async (request, response) => {
   const result = await getdata();
   response.send(result);
 });
 
 //it show how many url created month wise
-router.route("/data/chart").get(async (request, response) => {
+router.route("/data/chart").get(auth, async (request, response) => {
   const result = await getChart();
   response.send(result);
 });
