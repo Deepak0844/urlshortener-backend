@@ -53,7 +53,7 @@ router
   });
 
 // search for shortid available in database if available orginal url is rendered
-router.route("/:shortId").get(auth, async (request, response) => {
+router.route("/:shortId").get(async (request, response) => {
   const { shortId } = request.params;
   let counter = 0;
   const result = await ShortUrl({ shortId: shortId });
