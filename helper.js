@@ -188,7 +188,7 @@ function Email(email, response, message) {
     if (error) {
       response.status(404).send("error");
     } else {
-      response.send("password reset link has been send to your email");
+      response.send("password reset link has been sent to your email");
     }
   });
 }
